@@ -52,6 +52,7 @@ class Card:
 
         self.value = value
         self.colour = colour
+        self.wild_colour = None
 
     def __repr__(self):
         return f"Card<{self.colour.name}, {self.value.name}>"
@@ -79,6 +80,12 @@ class Card:
             return False
         
         return self.value == self.value and self.colour == self.colour
+
+    def from_data(data):
+        card = Card(Colour(data['colour']), (WildValue if data['colour'] == Colour.WILD else ColourValue)(data['value']))
+        if 'wild_colour' in data:
+            card.wild_colour = data['wild_colour']
+        return card
 
 class Deck:
     cards: list[Card] = []

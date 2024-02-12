@@ -33,3 +33,6 @@ class Hand:
     
     def __contains__(self, a: Card) -> bool:
         return a in self.cards
+    
+    def as_data(self) -> list[dict]:
+        return list(map(lambda card: {"value":card.value, "colour": card.colour}, self.cards))
